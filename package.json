@@ -1,0 +1,27 @@
+{
+  "name": "stranger",
+  "version": "1.0.0",
+  "description": "Playing around with Slack integration",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.x.x",
+    "body-parser": "^1.x.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelhamrik/stranger.git"
+  },
+  "author": "Pavel Hamrik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pavelhamrik/stranger/issues"
+  },
+  "homepage": "https://github.com/pavelhamrik/stranger#readme",
+  "engines": {
+    "node": "0.10.x"
+  }
+}
