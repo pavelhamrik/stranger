@@ -96,7 +96,8 @@ Stranger.prototype._sayHi = function (message) {
         console.log("Stranger: Catched - Group conversation.");
     }
     else if (this._isDirectConversation(message)) {
-        // TODO: postMessageToUser
+        var direct = self._getGroupById(message.channel);
+        self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
         console.log("Stranger: Catched - Direct conversation.");
     }
 };
@@ -170,6 +171,7 @@ Stranger.prototype._getRandomInt = function (min, max) {
 // utility function to get some random sample quote
 Stranger.prototype._getQuote = function () {
     var self = this;
+    // some more here: http://writing.upenn.edu/wh/archival/documents/sixwords/
     var messages = [
         "Why whisper what you can shout?",
         "Pluto is still a planet!",
