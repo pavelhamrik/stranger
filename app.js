@@ -36,6 +36,7 @@ app.listen(port, function () {
 var Stranger = function Constructor(settings) {
     this.settings = settings;
     this.settings.name = this.settings.name || 'Stranger';
+    this.settings.defaultChannel = this.settings.defaultChannel
 
     // TODO: this.settings.defaultChannel = this.settings.defaultChannel || this.channels[0].name;
 
@@ -66,7 +67,7 @@ Stranger.prototype._helloWorld = function () {
     //this.postMessageToChannel(this.channels[0].name, 'Hello World!\nSay `' + this.name + '` to invoke me!', {as_user: true});
     console.log('Stranger: _helloWorld called.');
     console.log("Stranger: " + this.settings.defaultChannel);
-    
+
     console.log(this.postMessageToChannel(this.settings.defaultChannel, 'Hello Secret World!\nSay `' + this.name + '` to summon me.', {as_user: true}));
 
 };
@@ -76,7 +77,7 @@ Stranger.prototype._onMessage = function (message) {
     if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
         this._sayHi(message);
     }
-    console.log('Stranger: _onMessage called.');
+    console.log('Stranger: _onMessage called:' + message + '.');
 };
 
 // simple reply
@@ -104,7 +105,7 @@ Stranger.prototype._sayHi = function (originalMessage) {
 Stranger.prototype._loadBotUser = function () {
     var self = this;
     this.user = this.users.filter(function (user) {
-        console.log('Stranger: Bot\'s user found.');
+        console.log('Stranger: Bot\'s user found:' + user.name + '.');
         return user.name === self.name;
     })[0];
 };
@@ -146,7 +147,7 @@ module.exports = Stranger
 
 // bot config
 var stranger = new Stranger({
-    token: process.env.BOT_API_KEY || require('../token'),
+    token: process.env.BOT_API_KEY,
     //dbPath: process.env.BOT_DB_PATH, // the env config not yet set: heroku config:add BOT_DB_PATH=thePath
     name: process.env.BOT_NAME,
     defaultChannel: process.env.BOT_DEFAULT_CHANNEL
