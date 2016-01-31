@@ -6,7 +6,7 @@ var util = require('util');
 //var path = require('path');
 //var fs = require('fs');
 //var SQLite = require('sqlite3').verbose();
-var slackbots = require('slackbots');
+var Bot = require('slackbots');
 
 var hello = require('./hello');
 
