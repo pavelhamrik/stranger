@@ -123,7 +123,9 @@ Stranger.prototype._getGroupById = function (groupId) {
 
 // get the user name from its id
 Stranger.prototype._getDirectById = function (userId) {
+    console.log(this.users)
     return this.users.filter(function (item) {
+        console.log('Stranger: item.id = ' + item.id + ', userID = ' + userID)
         return item.id === userId;
     })[0];
 };
