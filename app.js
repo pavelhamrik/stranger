@@ -91,7 +91,7 @@ Stranger.prototype._sayHi = function (message) {
         console.log("Stranger: Catched - Channel conversation.");
     }
     else if (this._isGroupConversation(message)) {
-        var group = self._getGroupById(message.group);
+        var group = self._getGroupById(message.channel);
         self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
         console.log("Stranger: Catched - Group conversation.");
     }
