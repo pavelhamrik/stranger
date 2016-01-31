@@ -6,6 +6,8 @@ var util = require('util');
 //var path = require('path');
 //var fs = require('fs');
 //var SQLite = require('sqlite3').verbose();
+
+// https://github.com/mishk0/slack-bot-api/blob/master/index.js
 var Bot = require('slackbots');
 
 var hello = require('./hello');
