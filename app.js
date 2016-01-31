@@ -128,7 +128,7 @@ Stranger.prototype._isChatMessage = function (message) {
 // check if the message is a channel conversation
 Stranger.prototype._isChannelConversation = function (message) {
     console.log('Stranger: message.channel[0] = ' + message.channel[0])
-    return typeof message.channel === 'string' && message.channel[0] === 'C';
+    return typeof message.channel === 'string' && (message.channel[0] === 'C' || message.channel[0] === 'G');
 };
 
 // check if the message is mentioning Stranger
