@@ -76,7 +76,8 @@ Stranger.prototype._helloWorld = function () {
 // on message
 Stranger.prototype._onMessage = function (message) {
     console.log('Stranger: _onMessage called:');
-    if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
+    //if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
+    if (this._isChatMessage(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
         console.log('Stranger: _onMessage condition fulfilled.');
         this._sayHi(message);
     }
