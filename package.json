@@ -6,7 +6,7 @@
   "dependencies": {
     "express": "^4.x.x",
     "body-parser": "^1.x.x",
-    "slack-client": "2.x.x"
+    "slack-client": "2.0.0-beta.3"
   },
   "devDependencies": {},
   "scripts": {
