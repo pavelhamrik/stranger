@@ -89,7 +89,8 @@ Stranger.prototype._onMessage = function (message) {
             console.log("Stranger: Catched - Group conversation.");
         }
         else if (this._isDirectConversation(message)) {
-            var direct = self._getUserById(message.channel);
+            console.log(message.channel)
+            var direct = self._getDirectById(message.channel);
             self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
             console.log("Stranger: Catched - Direct conversation.");
         }
@@ -121,7 +122,7 @@ Stranger.prototype._getGroupById = function (groupId) {
 };
 
 // get the user name from its id
-Stranger.prototype._getUserById = function (userId) {
+Stranger.prototype._getDirectById = function (userId) {
     return this.users.filter(function (item) {
         return item.id === userId;
     })[0];
