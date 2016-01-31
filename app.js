@@ -147,7 +147,7 @@ Stranger.prototype._isGroupConversation = function (message) {
 };
 
 // check if the message is a direct conversation
-Stranger.prototype._isGroupConversation = function (message) {
+Stranger.prototype._isDirectConversation = function (message) {
     return typeof message.channel === 'string' && message.channel[0] === 'D';
 };
 
