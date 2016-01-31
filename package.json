@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/pavelhamrik/stranger#readme",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.10.0"
   }
 }
