@@ -77,29 +77,24 @@ Stranger.prototype._helloWorld = function () {
 Stranger.prototype._onMessage = function (message) {
     console.log('Stranger: _onMessage called.');
     if (this._isChatMessage(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
-        this._sayHi(message);
+        var self = this;
+        if (this._isChannelConversation(message)) {
+            var channel = self._getChannelById(message.channel);
+            self.postMessageToChannel(channel.name, self._getQuote(), {as_user: true});
+            console.log("Stranger: Catched - Channel conversation.");
+        }
+        else if (this._isGroupConversation(message)) {
+            var group = self._getGroupById(message.channel);
+            self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
+            console.log("Stranger: Catched - Group conversation.");
+        }
+        else if (this._isDirectConversation(message)) {
+            var direct = self._getGroupById(message.channel);
+            self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
+            console.log("Stranger: Catched - Direct conversation.");
+        }
     }
     console.log(message);
-};
-
-// simple reply
-Stranger.prototype._sayHi = function (message) {
-    var self = this;
-    if (this._isChannelConversation(message)) {
-        var channel = self._getChannelById(message.channel);
-        self.postMessageToChannel(channel.name, self._getQuote(), {as_user: true});
-        console.log("Stranger: Catched - Channel conversation.");
-    }
-    else if (this._isGroupConversation(message)) {
-        var group = self._getGroupById(message.channel);
-        self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
-        console.log("Stranger: Catched - Group conversation.");
-    }
-    else if (this._isDirectConversation(message)) {
-        var direct = self._getGroupById(message.channel);
-        self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
-        console.log("Stranger: Catched - Direct conversation.");
-    }
 };
 
 // load the user object representing the bot
