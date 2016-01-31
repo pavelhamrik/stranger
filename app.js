@@ -45,7 +45,7 @@ var Stranger = function Constructor(settings) {
 };
 
 // inherits methods and properties from the Bot constructor
-util.inherits(NorrisBot, Bot);
+util.inherits(Stranger, Bot);
 
 // run the bot
 Stranger.prototype.run = function () {
@@ -68,7 +68,7 @@ Stranger.prototype._helloWorld = function () {
 
 // on message
 Stranger.prototype._onMessage = function (message) {
-    if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromNorrisBot(message) && this._isMentioningChuckNorris(message)) {
+    if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
         this._sayHi(message);
     }
 };
@@ -102,7 +102,7 @@ Stranger.prototype._loadBotUser = function () {
 };
 
 // get the channel name from its id
-NorrisBot.prototype._getChannelById = function (channelId) {
+Stranger.prototype._getChannelById = function (channelId) {
     return this.channels.filter(function (item) {
         return item.id === channelId;
     })[0];
@@ -119,12 +119,12 @@ Stranger.prototype._isChannelConversation = function (message) {
 };
 
 // check if the message is mentioning Stranger
-Stranger.prototype._isMentioningChuckNorris = function (message) {
+Stranger.prototype._isMentioningStranger = function (message) {
     return message.text.toLowerCase().indexOf('stranger') > -1 || message.text.toLowerCase().indexOf(this.name) > -1;
 };
 
 // check if the message is from Stranger themselves
-Stranger.prototype._isFromNorrisBot = function (message) {
+Stranger.prototype._isFromStranger = function (message) {
     return message.user === this.user.id;
 };
 
