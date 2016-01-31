@@ -33,17 +33,6 @@ app.listen(port, function () {
   console.log('Stranger listening on port ' + port);
 });
 
-// bot config
-var stranger = new Stranger({
-    token: process.env.BOT_API_KEY || require('../token'),
-    //dbPath: process.env.BOT_DB_PATH, // the env config not yet set: heroku config:add BOT_DB_PATH=thePath
-    name: process.env.BOT_NAME,
-    defaultChannel: process.env.BOT_DEFAULT_CHANNEL
-});
-
-// run stranger
-stranger.run();
-
 var Stranger = function Constructor(settings) {
     this.settings = settings;
     this.settings.name = this.settings.name || 'Stranger';
@@ -146,3 +135,14 @@ Stranger.prototype._getRandomInt = function (min, max) {
 
 // export Stranger
 module.exports = Stranger
+
+// bot config
+var stranger = new Stranger({
+    token: process.env.BOT_API_KEY || require('../token'),
+    //dbPath: process.env.BOT_DB_PATH, // the env config not yet set: heroku config:add BOT_DB_PATH=thePath
+    name: process.env.BOT_NAME,
+    defaultChannel: process.env.BOT_DEFAULT_CHANNEL
+});
+
+// run stranger
+stranger.run();
