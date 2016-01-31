@@ -37,7 +37,7 @@ app.listen(port, function () {
 var stranger = new Stranger({
     token: process.env.BOT_API_KEY || require('../token'),
     //dbPath: process.env.BOT_DB_PATH, // the env config not yet set: heroku config:add BOT_DB_PATH=thePath
-    name: process.env.BOT_NAME
+    name: process.env.BOT_NAME,
     defaultChannel: process.env.BOT_DEFAULT_CHANNEL
 });
 
