@@ -89,7 +89,7 @@ Stranger.prototype._onMessage = function (message) {
             console.log("Stranger: Catched - Group conversation.");
         }
         else if (this._isDirectConversation(message)) {
-            var direct = self._getGroupById(message.channel);
+            var direct = self._getUserById(message.channel);
             self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
             console.log("Stranger: Catched - Direct conversation.");
         }
@@ -146,7 +146,6 @@ Stranger.prototype._isGroupConversation = function (message) {
 Stranger.prototype._isDirectConversation = function (message) {
     return typeof message.channel === 'string' && message.channel[0] === 'D';
 };
-
 
 // check if the message is mentioning Stranger
 Stranger.prototype._isMentioningStranger = function (message) {
