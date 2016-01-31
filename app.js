@@ -87,8 +87,8 @@ Stranger.prototype._onMessage = function (message) {
             console.log("Stranger: Catched - Group conversation.");
         }
         else if (this._isDirectConversation(message)) {
-            console.log(message.channel)
-            var direct = self._getDirectById(message.channel);
+            console.log(message.user)
+            var direct = self._getDirectById(message.user);
             self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
             console.log("Stranger: Catched - Direct conversation.");
         }
