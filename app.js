@@ -66,7 +66,8 @@ Stranger.prototype._onStart = function () {
 Stranger.prototype._helloWorld = function () {
     //this.postMessageToChannel(this.channels[0].name, 'Hello World!\nSay `' + this.name + '` to invoke me!', {as_user: true});
     console.log('Stranger: _helloWorld called.');
-    console.log("Stranger: " + this.settings.defaultChannel);
+    console.log("Stranger: defaultChannel = " + this.settings.defaultChannel);
+    console.log("Stranger: channels[0].name = " + this.channels[0].name);
 
     console.log(this.postMessageToChannel(this.settings.defaultChannel, 'Hello Secret World!\nSay `' + this.name + '` to summon me.', {as_user: true}));
 
@@ -105,9 +106,9 @@ Stranger.prototype._sayHi = function (originalMessage) {
 Stranger.prototype._loadBotUser = function () {
     var self = this;
     this.user = this.users.filter(function (user) {
-        console.log('Stranger: Bot\'s user found:' + user.name + '.');
         return user.name === self.name;
     })[0];
+    console.log('Stranger: Bot\'s user found:' + this.user + '.');
 };
 
 // get the channel name from its id
