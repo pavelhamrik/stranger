@@ -181,7 +181,19 @@ Stranger.prototype._getQuote = function () {
         "Make it up as you go.",
         "I make mistakes because I'm human",
         "Home alone. Hears noise. Calls mom.",
-        "The sky is not the limit."
+        "The sky is not the limit.",
+        "Live and die by your words.",
+        "I love being indoctrinated by you.",
+        "Rarely lives up to her name.",
+        "The hits just keep on coming.",
+        "I still do not regret anything.",
+        "Please, Time, I am not ready.",
+        "A decision was made, I complied.",
+        "My life, lived inside my head.",
+        "Oh is it really time to.",
+        "This time, I actually hit send.",
+        "Wait, where did the weekend go?",
+        "Maybe art school was a mistake."
     ];
     return messages[self._getRandomInt(0, messages.length - 1)]
 }
