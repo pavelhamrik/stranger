@@ -83,15 +83,15 @@ Stranger.prototype._onMessage = function (message) {
 };
 
 // simple reply
-Stranger.prototype._sayHi = function (originalMessage) {
+Stranger.prototype._sayHi = function (message) {
     var self = this;
     if (this._isChannelConversation(message)) {
-        var channel = self._getChannelById(originalMessage.channel);
+        var channel = self._getChannelById(message.channel);
         self.postMessageToChannel(channel.name, self._getQuote(), {as_user: true});
         console.log("Stranger: Catched - Channel conversation.");
     }
     else if (this._isGroupConversation(message)) {
-        var group = self._getGroupById(originalMessage.group);
+        var group = self._getGroupById(message.group);
         self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
         console.log("Stranger: Catched - Group conversation.");
     }
