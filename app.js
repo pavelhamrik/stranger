@@ -75,10 +75,20 @@ Stranger.prototype._helloWorld = function () {
 
 // on message
 Stranger.prototype._onMessage = function (message) {
-    console.log('Stranger: _onMessage called:');
-    if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
-        console.log('Stranger: _onMessage condition fulfilled.');
-        this._sayHi(message);
+    console.log('Stranger: _onMessage called. Type = ' + message.channel[0] + '.');
+    if (this._isChatMessage(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
+        if (this._isChannelConversation(message)) {
+            this._sayHi(message);
+            console.log("Stranger: Catched - Channel conversation.");
+        }
+        else if (this._isGroupConversation(message)) {
+            //this._sayHi(message);
+            console.log("Stranger: Catched - Group conversation.");
+        }
+        else if (this._isDirectConversation(message)) {
+            //this._sayHi(message);
+            console.log("Stranger: Catched - Direct conversation.");
+        }
     }
     console.log(message);
 };
@@ -120,6 +130,13 @@ Stranger.prototype._getChannelById = function (channelId) {
     })[0];
 };
 
+// get the group name from its id
+Stranger.prototype._getGroupById = function (groupId) {
+    return this.groups.filter(function (item) {
+        return item.id === groupId;
+    })[0];
+};
+
 // check if the message is a chat message
 Stranger.prototype._isChatMessage = function (message) {
     return message.type === 'message' && Boolean(message.text);
@@ -127,9 +144,19 @@ Stranger.prototype._isChatMessage = function (message) {
 
 // check if the message is a channel conversation
 Stranger.prototype._isChannelConversation = function (message) {
-    console.log('Stranger: message.channel[0] = ' + message.channel[0])
-    return typeof message.channel === 'string' && (message.channel[0] === 'C' || message.channel[0] === 'G');
+    return typeof message.channel === 'string' && message.channel[0] === 'C';
 };
+
+// check if the message is a group conversation
+Stranger.prototype._isGroupConversation = function (message) {
+    return typeof message.channel === 'string' && message.channel[0] === 'G';
+};
+
+// check if the message is a direct conversation
+Stranger.prototype._isGroupConversation = function (message) {
+    return typeof message.channel === 'string' && message.channel[0] === 'D';
+};
+
 
 // check if the message is mentioning Stranger
 Stranger.prototype._isMentioningStranger = function (message) {
