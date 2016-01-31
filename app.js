@@ -75,10 +75,11 @@ Stranger.prototype._helloWorld = function () {
 
 // on message
 Stranger.prototype._onMessage = function (message) {
+    console.log('Stranger: _onMessage called:');
     if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
+        console.log('Stranger: _onMessage condition fulfilled.');
         this._sayHi(message);
     }
-    console.log('Stranger: _onMessage called:');
     console.log(message);
 };
 
@@ -109,7 +110,7 @@ Stranger.prototype._loadBotUser = function () {
     this.user = this.users.filter(function (user) {
         return user.name === self.name;
     })[0];
-    console.log('Stranger: Bot\'s user found:' + this.user.name + '.');
+    console.log('Stranger: Bot\'s user found: ' + this.user.name + '.');
 };
 
 // get the channel name from its id
