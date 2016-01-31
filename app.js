@@ -49,10 +49,10 @@ util.inherits(Stranger, Bot);
 
 // run the bot
 Stranger.prototype.run = function () {
-    console.log('Stranger running.');
     Stranger.super_.call(this, this.settings);
     this.on('start', this._onStart);
     this.on('message', this._onMessage);
+    console.log('Stranger: Running.');
 };
 
 // on start
@@ -65,6 +65,7 @@ Stranger.prototype._onStart = function () {
 Stranger.prototype._helloWorld = function () {
     //this.postMessageToChannel(this.channels[0].name, 'Hello World!\nSay `' + this.name + '` to invoke me!', {as_user: true});
     this.postMessageToChannel(this.settings.defaultChannel, 'Hello Secret World!\nSay `' + this.name + '` to summon me.', {as_user: true});
+    console.log('Stranger: _helloWorld called.');
 };
 
 // on message
@@ -72,6 +73,7 @@ Stranger.prototype._onMessage = function (message) {
     if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
         this._sayHi(message);
     }
+    console.log('Stranger: _onMessage called.');
 };
 
 // simple reply
@@ -92,12 +94,14 @@ Stranger.prototype._sayHi = function (originalMessage) {
     ];
     var channel = self._getChannelById(originalMessage.channel);
     self.postMessageToChannel(channel.name, messages[self._getRandomInt(0, messages.length - 1)], {as_user: true});
+    console.log('Stranger: _sayHi called.');
 };
 
 // load the user object representing the bot
 Stranger.prototype._loadBotUser = function () {
     var self = this;
     this.user = this.users.filter(function (user) {
+        console.log('Stranger: Bot\'s user found.');
         return user.name === self.name;
     })[0];
 };
@@ -131,7 +135,7 @@ Stranger.prototype._isFromStranger = function (message) {
 
 // helper function to get a random integer from a given range
 Stranger.prototype._getRandomInt = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 // export Stranger
