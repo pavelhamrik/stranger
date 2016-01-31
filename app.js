@@ -66,7 +66,7 @@ Stranger.prototype._onStart = function () {
 Stranger.prototype._helloWorld = function () {
     //this.postMessageToChannel(this.channels[0].name, 'Hello World!\nSay `' + this.name + '` to invoke me!', {as_user: true});
     console.log('Stranger: _helloWorld called.');
-    this.postMessageToChannel(this.settings.defaultChannel, self._getQuote(), {as_user: true});
+    this.postMessageToChannel(this.settings.defaultChannel, this._getQuote(), {as_user: true});
     //console.log(this.postMessageToChannel(this.settings.defaultChannel, 'Hello Secret World!\nSay `' + this.name + '` to summon me.', {as_user: true}));
 
 };
