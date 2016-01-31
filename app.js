@@ -64,36 +64,34 @@ Stranger.prototype._onStart = function () {
 };
 
 Stranger.prototype._helloWorld = function () {
-    //this.postMessageToChannel(this.channels[0].name, 'Hello World!\nSay `' + this.name + '` to invoke me!', {as_user: true});
-    console.log('Stranger: _helloWorld called.');
+    // TODO: The following should be conditioned
     this.postMessageToChannel(this.settings.defaultChannel, this._getQuote(), {as_user: true});
-    //console.log(this.postMessageToChannel(this.settings.defaultChannel, 'Hello Secret World!\nSay `' + this.name + '` to summon me.', {as_user: true}));
-
+    this.postMessageToGroup(this.settings.defaultChannel, this._getQuote(), {as_user: true});
 };
 
 // on message
 Stranger.prototype._onMessage = function (message) {
-    console.log('Stranger: _onMessage called.');
     if (this._isChatMessage(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
-        var self = this;
         if (this._isChannelConversation(message)) {
-            var channel = self._getChannelById(message.channel);
-            self.postMessageToChannel(channel.name, self._getQuote(), {as_user: true});
-            console.log("Stranger: Catched - Channel conversation.");
+            var channel = this._getChannelById(message.channel);
+            this.postMessageToChannel(channel.name, this._getQuote(), {as_user: true});
+            console.log("Stranger: Message catched - Channel conversation.");
         }
         else if (this._isGroupConversation(message)) {
-            var group = self._getGroupById(message.channel);
-            self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
-            console.log("Stranger: Catched - Group conversation.");
+            var group = this._getGroupById(message.channel);
+            this.postMessageToGroup(group.name, this._getQuote(), {as_user: true});
+            console.log("Stranger: Message catched - Group conversation.");
         }
         else if (this._isDirectConversation(message)) {
-            console.log(message.user)
-            var direct = self._getDirectById(message.user);
-            self.postMessageToUser(direct.name, self._getQuote(), {as_user: true});
-            console.log("Stranger: Catched - Direct conversation.");
+            var direct = this._getDirectById(message.user);
+            this.postMessageToUser(direct.name, this._getQuote(), {as_user: true});
+            console.log("Stranger: Message catched - Direct conversation.");
+        }
+        else {
+            console.log("Stranger: Message catched - Other type, see below:");
+            console.log(message);
         }
     }
-    console.log(message);
 };
 
 // load the user object representing the bot
@@ -164,7 +162,6 @@ Stranger.prototype._getRandomInt = function (min, max) {
 
 // utility function to get some random sample quote
 Stranger.prototype._getQuote = function () {
-    var self = this;
     // some more here: http://writing.upenn.edu/wh/archival/documents/sixwords/
     var messages = [
         "Why whisper what you can shout?",
@@ -191,7 +188,7 @@ Stranger.prototype._getQuote = function () {
         "Wait, where did the weekend go?",
         "Maybe art school was a mistake."
     ];
-    return messages[self._getRandomInt(0, messages.length - 1)]
+    return messages[this._getRandomInt(0, messages.length - 1)]
 }
 
 // export Stranger
