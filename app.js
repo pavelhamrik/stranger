@@ -169,6 +169,7 @@ Stranger.prototype._getRandomInt = function (min, max) {
 
 // utility function to get some random sample quote
 Stranger.prototype._getQuote = function () {
+    var self = this;
     var messages = [
         "Why whisper what you can shout?",
         "Pluto is still a planet!",
