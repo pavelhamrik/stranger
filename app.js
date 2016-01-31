@@ -75,20 +75,9 @@ Stranger.prototype._helloWorld = function () {
 
 // on message
 Stranger.prototype._onMessage = function (message) {
-    console.log('Stranger: _onMessage called. Type = ' + message.channel[0] + '.');
+    console.log('Stranger: _onMessage called.');
     if (this._isChatMessage(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
-        if (this._isChannelConversation(message)) {
-            this._sayHi(message);
-            console.log("Stranger: Catched - Channel conversation.");
-        }
-        else if (this._isGroupConversation(message)) {
-            //this._sayHi(message);
-            console.log("Stranger: Catched - Group conversation.");
-        }
-        else if (this._isDirectConversation(message)) {
-            //this._sayHi(message);
-            console.log("Stranger: Catched - Direct conversation.");
-        }
+        this._sayHi(message);
     }
     console.log(message);
 };
@@ -96,22 +85,20 @@ Stranger.prototype._onMessage = function (message) {
 // simple reply
 Stranger.prototype._sayHi = function (originalMessage) {
     var self = this;
-    var messages = [
-        "Why whisper what you can shout?",
-        "Pluto is still a planet!",
-        "Sour candy makes my face twitch.",
-        "I stand up for what's right.",
-        "I am terrified of tall people.",
-        "Yeah I'm that kind of girl.",
-        "Insomnia gives me time to think.",
-        "Make it up as you go.",
-        "I make mistakes because I'm human",
-        "Home alone. Hears noise. Calls mom.",
-        "The sky is not the limit."
-    ];
-    var channel = self._getChannelById(originalMessage.channel);
-    self.postMessageToChannel(channel.name, messages[self._getRandomInt(0, messages.length - 1)], {as_user: true});
-    console.log('Stranger: _sayHi called.');
+    if (this._isChannelConversation(message)) {
+        var channel = self._getChannelById(originalMessage.channel);
+        self.postMessageToChannel(channel.name, self._getQuote(), {as_user: true});
+        console.log("Stranger: Catched - Channel conversation.");
+    }
+    else if (this._isGroupConversation(message)) {
+        var group = self._getGroupById(originalMessage.group);
+        self.postMessageToGroup(group.name, self._getQuote(), {as_user: true});
+        console.log("Stranger: Catched - Group conversation.");
+    }
+    else if (this._isDirectConversation(message)) {
+        // TODO: postMessageToUser
+        console.log("Stranger: Catched - Direct conversation.");
+    }
 };
 
 // load the user object representing the bot
@@ -134,6 +121,13 @@ Stranger.prototype._getChannelById = function (channelId) {
 Stranger.prototype._getGroupById = function (groupId) {
     return this.groups.filter(function (item) {
         return item.id === groupId;
+    })[0];
+};
+
+// get the user name from its id
+Stranger.prototype._getUserById = function (userId) {
+    return this.users.filter(function (item) {
+        return item.id === userId;
     })[0];
 };
 
@@ -171,6 +165,24 @@ Stranger.prototype._isFromStranger = function (message) {
 // helper function to get a random integer from a given range
 Stranger.prototype._getRandomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// utility function to get some random sample quote
+Stranger.prototype._getQuote = function () {
+    var messages = [
+        "Why whisper what you can shout?",
+        "Pluto is still a planet!",
+        "Sour candy makes my face twitch.",
+        "I stand up for what's right.",
+        "I am terrified of tall people.",
+        "Yeah I'm that kind of girl.",
+        "Insomnia gives me time to think.",
+        "Make it up as you go.",
+        "I make mistakes because I'm human",
+        "Home alone. Hears noise. Calls mom.",
+        "The sky is not the limit."
+    ];
+    return messages[self._getRandomInt(0, messages.length - 1)]
 }
 
 // export Stranger
