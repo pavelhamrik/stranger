@@ -35,7 +35,7 @@ app.listen(port, function () {
 
 var Stranger = function Constructor(settings) {
     this.settings = settings;
-    this.settings.name = this.settings.name || 'Stranger';
+    this.settings.name = this.settings.name || 'stranger';
     this.settings.defaultChannel = this.settings.defaultChannel
 
     // TODO: this.settings.defaultChannel = this.settings.defaultChannel || this.channels[0].name;
@@ -78,7 +78,8 @@ Stranger.prototype._onMessage = function (message) {
     if (this._isChatMessage(message) && this._isChannelConversation(message) && !this._isFromStranger(message) && this._isMentioningStranger(message)) {
         this._sayHi(message);
     }
-    console.log('Stranger: _onMessage called:' + message + '.');
+    console.log('Stranger: _onMessage called:');
+    console.log(message);
 };
 
 // simple reply
@@ -108,7 +109,7 @@ Stranger.prototype._loadBotUser = function () {
     this.user = this.users.filter(function (user) {
         return user.name === self.name;
     })[0];
-    console.log('Stranger: Bot\'s user found:' + this.user + '.');
+    console.log('Stranger: Bot\'s user found:' + this.user.name + '.');
 };
 
 // get the channel name from its id
